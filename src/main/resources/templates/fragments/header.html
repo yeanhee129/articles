@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<!-- header라는 이름으로 선언-->
+<div th:fragment="header">
+<!--    <h1>Header Area</h1>-->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">학사관리 프로그램 v1.0</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="/index">홈으로</a>
+                    <a class="nav-link" href="/list">학생목록</a>
+                    <a class="nav-link" href="/insert">성적입력</a>
+                    <a class="nav-link" href="/grade">학생성적</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
