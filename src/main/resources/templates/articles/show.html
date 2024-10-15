@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org" xmlns:layout="www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
 <meta charset="UTF-8">
-<title>School Manager</title>
+<title>Article Manager</title>
 <!-- 전체 적용될 CSS -->
 <th:block layout:fragment="css"></th:block>
 <!-- 전체 적용될 스크립트 -->
@@ -19,15 +19,13 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row" >1</th>
-            <td >제목111</td>
-            <td >내용 1111</td>
-        </tr>
+            <th scope="row" th:text="${dto.id}">1</th>
+            <td th:text="${dto.title}"></td>
+            <td th:text="${dto.content}"></td>
         </tbody>
     </table>
-    <a href="" class="btn btn-primary">Edit</a>
-    <a href="" class="btn btn-danger">Delete</a>
+    <a th:href="@{/articles/{id}/update(id=${dto.id})}" class="btn btn-primary">Edit</a>
+    <a th:href="@{/articles/{id}/delete(id=${dto.id})}" class="btn btn-danger">Delete</a>
     <a href="/articles">Go to Article List</a>
     <br><br>
     <div class="card m-2">
