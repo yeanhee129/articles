@@ -20,6 +20,7 @@ public class ArticleDao {
         String sql = "SELECT a FROM Article a ORDER BY a.id";
         Query query = em.createQuery(sql);
         List<Article> articleList = query.getResultList();
+        System.out.println(articleList);
         return articleList;
     }
 
