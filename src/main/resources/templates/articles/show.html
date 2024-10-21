@@ -19,7 +19,7 @@
         </tr>
         </thead>
         <tbody>
-            <th scope="row" th:text="${dto.id}">1</th>
+            <th scope="row" id="articleId" th:text="${dto.id}"></th>
             <td th:text="${dto.title}"></td>
             <td th:text="${dto.content}"></td>
         </tbody>
@@ -60,7 +60,27 @@
         $(document).ready(function(){
           $(document).on("click", "#comment-delete-btn", function(){
             let commentId = $(this).next().val();
-            location.href = '/articles/comments/' + commentId;
+            let sendUrl = '/api/comments/' + commentId;
+
+            $.ajax({
+                url : sendUrl,
+                type : "delete",
+<!--                data 받을 타입-->
+                datatype : 'json',
+                headers : {
+                    "Content-Type" : "application/json",
+                },
+                success : function(data,status,xhr){
+                    alert(data.message);
+<!--                    location.href = "/articles/" + [[*{id}]];-->
+<!--                    아래와 같이 위에 있는 타임리프 값 사용 가능-->
+                    location.href = `/articles/[[*{id}]]`;
+                },
+                error : function(xhr,status,error){
+                    console.log(error)
+                },
+            })
+<!--            location.href = '/articles/comments/' + commentId;-->
           });
 
           $("#comment-create-btn").on("click", function(){
@@ -75,7 +95,33 @@
               $("#new-comment-body").focus();
               return;
             }
-            $("form").submit();
+<!--            $("form").submit();-->
+
+            let sendUrl = `/api/articles/[[*{id}]]/comments`;
+            let newComment = {
+                'nickname' : $("#new-comment-nickname").val(),
+                'body' : $("#new-comment-body").val()
+            };
+
+<!--            let articleId = $("#articleId").text();-->
+            $.ajax({
+                url : sendUrl,
+                type : "post",
+                datatype : "json",
+                headers : {
+                    "Content-Type" : "application/json",
+                },
+                data : JSON.stringify(
+                    newComment
+                ),
+                success : function(data,status,xhr){
+                    alert(data.message);
+                    location.href = `/articles/[[*{id}]]`;
+                },
+                error : function(xhr,status,error){
+                    console.log(error)
+                }
+            }) // ajax end
           });
 
           $(document).on("click", "#comment-update-btn", function(){
